@@ -14,7 +14,30 @@ class RemoteAuthentication {
   });
 
   Future<void> auth(AutheticationParams params) async {
-    final body = {'email': params.email, 'password': params.secret};
-    httpClient.request(url: url, method: 'post', body: body);
+    httpClient.request(
+      url: url,
+      method: 'post',
+      body: RemoteAutheticationParams.toDomain(params).toJson(),
+    );
   }
+}
+
+class RemoteAutheticationParams {
+  final String email;
+  final String password;
+
+  RemoteAutheticationParams({
+    @required this.email,
+    @required this.password,
+  });
+
+  factory RemoteAutheticationParams.toDomain(AutheticationParams entity) => RemoteAutheticationParams(
+        email: entity.email,
+        password: entity.secret,
+      );
+
+  Map toJson() => {
+        'email': email,
+        'password': password,
+      };
 }

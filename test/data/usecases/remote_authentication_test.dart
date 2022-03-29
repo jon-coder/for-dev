@@ -19,7 +19,7 @@ main() {
     url = faker.internet.httpUrl();
     sut = RemoteAuthentication(httpClient: httpClient, url: url);
   });
-  test('Should call HttpClient with correct body', () async {
+  test('Should call HttpClient with correct values', () async {
     final params = AutheticationParams(email: faker.internet.email(), secret: faker.internet.password());
     await sut.auth(params);
 
